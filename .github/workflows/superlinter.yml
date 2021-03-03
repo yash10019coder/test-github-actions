@@ -12,12 +12,13 @@ jobs:
       matrix:
         python-version: [3.8]
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    # You can test your matrix by printing the current Python version
-    - name: Display Python version
-      run: python test.py
+  steps:
+   - name: checkout repo content
+     uses: actions/checkout@v2 # checkout the repository content to github runner.
+   - name: setup python
+     uses: actions/setup-python@v2
+     with:
+       python-version: 3.8 #install the python needed
+   - name: execute py script # run the run.py to get the latest data
+     run: |
+       python test.py

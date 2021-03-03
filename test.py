@@ -1,6 +1,8 @@
 import re
 
-my_file = open("CODE", "+r")
+filename = '.github/CODEOWNERS'
+
+my_file = open(filename, "+r")
 
 content = my_file.read()
 

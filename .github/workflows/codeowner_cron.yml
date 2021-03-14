@@ -1,5 +1,9 @@
 name: Read issue
 
+# this is the corn job
+# FLOW:
+# cron job -> read codewoner file -> Todo is due today(UTC Based) -> Edit codewoner file (edit.py) -> Create PR
+
 on:
   issues:
     types: [opened, edited]
@@ -28,8 +32,6 @@ jobs:
       run: |
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
-    - name: create branch
-      run: |
-        git checkout -b ${{ github.event.issue.body }}
-        git commit -a -m "new date commit"
-        git push origin ${{ github.event.issue.body }}
+    - name: git commit
+      run: | # commit directly to repo
+        gh issue list

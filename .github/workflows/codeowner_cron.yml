@@ -31,5 +31,4 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
       run: | # commit directly to repo
-        echo "$TOKEN"
-        gh auth login --with-token "$TOKEN"
+        gh issue list

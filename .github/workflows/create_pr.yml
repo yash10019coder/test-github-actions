@@ -1,4 +1,4 @@
-name: Create PR
+name: Read issue
 
 on:
   issues:
@@ -21,6 +21,12 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8 #install the python needed
-    - name: execute py script # run the run.py to get the latest data
+    - name: execute py script # run the test.py to get the latest data
       run: |
         python test.py "${{ github.event.issue.title }}" "${{ github.event.issue.body }}"
+    - name: git branch
+      run: |
+        git branch
+    - name: install github cli #use this to create Pr title etc...
+      run: |
+        sudo apt install gh

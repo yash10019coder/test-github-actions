@@ -11,20 +11,28 @@
 # jobs:
 #   build:
 
-#     runs-on: ubuntu-latest
-#     strategy:
-#       # You can use PyPy versions in python-version.
-#       # For example, pypy2 and pypy3
-#       matrix:
-#         python-version: [3.8]
+    # runs-on: ubuntu-latest
+    # strategy:
+    #   # You can use PyPy versions in python-version.
+    #   # For example, pypy2 and pypy3
+    #   matrix:
+    #     python-version: [3.8]
 
-#     steps:
-#     - name: checkout repo content
-#       uses: actions/checkout@v2 # checkout the repository content to github runner.
-#     - name: setup python
-#       uses: actions/setup-python@v2
-#       with:
-#         python-version: 3.8 #install the python needed
-#     - name: execute py script # run the run.py to get the latest data
-#       run: |
-#         python test.py "${{ github.event.issue.title }}" "${{ github.event.issue.body }}"
+    # steps:
+    # - name: checkout repo content
+    #   uses: actions/checkout@v2 # checkout the repository content to github runner.
+    # - name: setup python
+    #   uses: actions/setup-python@v2
+    #   with:
+    #     python-version: 3.8 #install the python needed
+    # - name: execute py script # run the test.py to get the latest data
+    #   run: |
+    #     python test.py "${{ github.event.issue.title }}" "${{ github.event.issue.body }}"
+    # - name: setup git config
+    #   run: |
+    #     git config user.name "GitHub Actions Bot"
+    #     git config user.email "<>"
+    # - name: git commit
+    #   run: | # commit directly to repo
+    #     git commit -a -m "new date commit"
+    #     git push origin main

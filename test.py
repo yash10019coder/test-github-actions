@@ -4,8 +4,8 @@ import sys
 issue_title = sys.argv[1]
 issue_content = sys.argv[2]
 
-print(issue_title)
-print(issue_content)
+print('issue_title', issue_title)
+print('issue_content', issue_content)
 
 filename = '.github/CODEOWNERS'
 

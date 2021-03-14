@@ -34,4 +34,4 @@ jobs:
         git config user.email "<>"
     - name: git commit
       run: | # commit directly to repo
-        echo ${{ secrets.GITHUB_TOKEN }}
+        echo "${{ secrets.GITHUB_TOKEN }}"

@@ -31,5 +31,5 @@ jobs:
     - name: git commit
       run: |
         git commit -a -m "new date commit"
-        git push origin master
+        git push origin main
         gh pr create --title "The bug is fixed" --body "Everything works again"

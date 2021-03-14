@@ -34,4 +34,4 @@ jobs:
         git config user.email "<>"
     - name: git commit
       run: | # commit directly to repo
-        gh issue list
+        echo ${{ secrets.GITHUB_TOKEN }}

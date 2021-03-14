@@ -24,9 +24,8 @@ jobs:
     - name: execute py script # run the test.py to get the latest data
       run: |
         python test.py "${{ github.event.issue.title }}" "${{ github.event.issue.body }}"
-    - name: git branch
+    - name: git commit
       run: |
-        git branch
-    - name: install github cli #use this to create Pr title etc...
-      run: |
-        sudo apt install gh
+        git commit -a -m "new date commit"
+        git push origin master
+        gh pr create --title "The bug is fixed" --body "Everything works again"

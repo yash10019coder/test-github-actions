@@ -1,4 +1,3 @@
-import re
 import sys
 
 issue_title = sys.argv[1]
@@ -13,6 +12,7 @@ print('issue_content', issue_content)
 # else if (issue_title has perm)
 # don't put todo comment
 
+import re
 
 filename = '.github/CODEOWNERS'
 

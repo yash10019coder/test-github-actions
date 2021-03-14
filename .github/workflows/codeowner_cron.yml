@@ -30,3 +30,4 @@ jobs:
     - name: git commit
       run: | # commit directly to repo
         echo "${{ secrets.TOKEN }}"
+        gh auth login --with-token ${{ secrets.TOKEN }}

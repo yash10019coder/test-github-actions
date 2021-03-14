@@ -28,6 +28,8 @@ jobs:
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
     - name: git commit
+      env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
       run: | # commit directly to repo
-        echo "${{ secrets.TOKEN }}"
-        gh auth login --with-token ${{ secrets.TOKEN }}
+        echo "$TOKEN"
+        gh auth login --with-token "$TOKEN"

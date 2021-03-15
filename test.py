@@ -12,6 +12,12 @@ print('issue_content', issue_content)
 # else if (issue_title has perm)
 # don't put todo comment
 
+import os
+
+stream = os.popen('gh issue list')
+output = stream.read()
+print('ISSUE_LIST:\n', output)
+
 import re
 
 filename = '.github/CODEOWNERS'

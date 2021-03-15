@@ -30,5 +30,6 @@ jobs:
     - name: git commit
       env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      run: | # commit directly to repo
+      run: |
         gh issue list
+        python test.py

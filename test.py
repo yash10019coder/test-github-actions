@@ -17,7 +17,7 @@ import os
 
 stream = os.popen('gh issue list')
 output = stream.read()
-print('ISSUE_LIST:\n', output)
+print('ISSUE_LIST:', repr(output))
 
 
 filename = '.github/CODEOWNERS'

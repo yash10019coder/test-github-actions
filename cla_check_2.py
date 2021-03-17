@@ -23,14 +23,15 @@ def getValues():
 
     # Call the Sheets API
     sheet = service.spreadsheets()
-    return sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                               range=SAMPLE_RANGE_NAME).execute()
+    return result.get('values', [])
 
 
 def main():
     prAuthor = sys.argv[1]
 
-    print(TOKEN)
+    print(prAuthor)
     values = getValues()
     if not values:
         print('No data found.')

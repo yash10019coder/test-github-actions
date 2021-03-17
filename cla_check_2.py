@@ -13,29 +13,32 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 SAMPLE_SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8'
 SAMPLE_RANGE_NAME = 'Usernames'
 
+
 def getValues():
-  creds = None
-  creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    creds = None
+    creds = Credentials.from_authorized_user_file('token.json', SCOPES)
 
-  service = build('sheets', 'v4', credentials=creds)
+    service = build('sheets', 'v4', credentials=creds)
 
-  # Call the Sheets API
-  sheet = service.spreadsheets()
-  return sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+    # Call the Sheets API
+    sheet = service.spreadsheets()
+    return sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                               range=SAMPLE_RANGE_NAME).execute()
 
+
 def main():
-  prAuthor = sys.argv[1]
-  
-  print(prAuthor)
-  values = getValues()
-  if not values:
-      print('No data found.')
-  else:
-      print('Name, Major:')
-      for row in values:
-          # Print columns A and E, which correspond to indices 0 and 4.
-          print('%s' % (row[0]))
+    prAuthor = sys.argv[1]
+
+    print(prAuthor)
+    values = getValues()
+    if not values:
+        print('No data found.')
+    else:
+        print('Name, Major:')
+        for row in values:
+            # Print columns A and E, which correspond to indices 0 and 4.
+            print('%s' % (row[0]))
+
 
 if __name__ == '__main__':
     main()

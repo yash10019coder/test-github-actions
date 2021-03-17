@@ -56,23 +56,23 @@ def get_values():
             ).execute()
         result = result.get('values', [])
     except Exception as e:
-        python_utils.PRINT('API error:', e)
+        print('API error:', e)
     return result
 
 
 def main():
     """Runs cla check."""
     pr_author = [sys.argv[1]]
-    python_utils.PRINT('Checking if ', pr_author, ' has signed the CLA')
+    print('Checking if ', pr_author, ' has signed the CLA')
     values = get_values()
     if not values:
-        python_utils.PRINT('No data found.')
+        print('No data found.')
         exit(1)
     if pr_author in values:
-        python_utils.PRINT(pr_author, ' has signed the CLA')
+        print(pr_author, ' has signed the CLA')
         exit(0)
     else:
-        python_utils.PRINT(pr_author, ' has not signed the CLA')
+        print(pr_author, ' has not signed the CLA')
         exit(1)
 
 

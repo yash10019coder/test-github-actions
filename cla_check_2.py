@@ -39,11 +39,13 @@ def main():
   print('Checking if ', prAuthor, ' has signed the CLA')
   values = getValues()
   if not values:
-      print('No data found.')
+    print('No data found.')
   if(prAuthor in values):
-      exit(0)
+		print(prAuthor, ' has signed the CLA')
+		exit(0)
   else:
-      exit(1)
+		print(prAuthor, ' has not signed the CLA')
+		exit(1)
 
 
 if __name__ == '__main__':

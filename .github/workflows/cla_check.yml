@@ -18,5 +18,7 @@ jobs:
         run: |
           pip install google-api-python-client google-auth-oauthlib
       - name: execute cla script
+        env:
+          SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
         run: |
-          python cla_check_2.py gp201
+          python cla_check_2.py '$SHEETS_TOKEN' gp201

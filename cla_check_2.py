@@ -5,6 +5,7 @@ from google.oauth2.credentials import Credentials
 
 import os.path
 import sys
+import json
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
@@ -12,11 +13,11 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8'
 SAMPLE_RANGE_NAME = 'Usernames'
-
+TOKEN = ''
 
 def getValues():
     creds = None
-    creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    creds = Credentials.from_authorized_user_info(json.loads(TOKEN), SCOPES)
 
     service = build('sheets', 'v4', credentials=creds)
 
@@ -27,7 +28,8 @@ def getValues():
 
 
 def main():
-    prAuthor = sys.argv[1]
+    TOKEN = sys.argv[1]
+    prAuthor = sys.argv[2]
 
     print(prAuthor)
     values = getValues()

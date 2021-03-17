@@ -2,11 +2,16 @@ name: CLA check
 
 # check if the PR author has signed the CLA
 
-on: push
+on:
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  cla_check:
+    runs-on:  ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
 
     steps:
       - uses: actions/checkout@v2
@@ -21,4 +26,4 @@ jobs:
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
         run: |
-          python cla_check_2.py 'gp202'
+          python cla_check_2.py ${{ github.event.pull_request.user.login }}

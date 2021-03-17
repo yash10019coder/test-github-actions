@@ -8,19 +8,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      # You can use PyPy versions in python-version.
-      # For example, pypy2 and pypy3
-      matrix:
-        python-version: [3.8]
 
     steps:
-    - name: checkout repo content
-      uses: actions/checkout@v2 # checkout the repository content to github runner.
-    - name: setup python
+    - uses: actions/checkout@v2
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8 #install the python needed
-    - name: execute py script # run the test.py to get the latest data
+        python-version: '3.8'
+    - name: Install dependencies
+      run: |
+        pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+    - name: execute cla script
       run: |
         python cla_check_2.py

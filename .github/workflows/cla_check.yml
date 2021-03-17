@@ -27,3 +27,9 @@ jobs:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
         run: |
           python cla_check_2.py ${{ github.event.pull_request.user.login }}
+      - name: Comment on failure
+        if: ${{ failure() }}
+        env:
+            GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} --body 'Hi @' + ${{ github.event.pull_request.user.login }} + ', you need to sign the CLA.'

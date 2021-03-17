@@ -31,7 +31,7 @@ def main():
     TOKEN = sys.argv[1]
     prAuthor = sys.argv[2]
 
-    print(prAuthor)
+    print(TOKEN)
     values = getValues()
     if not values:
         print('No data found.')

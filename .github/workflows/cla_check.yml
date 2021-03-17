@@ -6,18 +6,17 @@ on: push
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
-    - name: Install dependencies
-      run: |
-        pip install google-api-python-client google-auth-oauthlib
-    - name: execute cla script
-      run: |
-        python cla_check_2.py gp201
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+      - name: Install dependencies
+        run: |
+          pip install google-api-python-client google-auth-oauthlib
+      - name: execute cla script
+        run: |
+          python cla_check_2.py gp201

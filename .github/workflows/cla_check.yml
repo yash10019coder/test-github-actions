@@ -1,8 +1,8 @@
-name: Read issue
+name: CLA check
 
-on:
-  issues:
-    types: [opened, edited]
+# check if the PR author has signed the CLA
+
+on: push
 
 jobs:
   build:
@@ -23,13 +23,4 @@ jobs:
         python-version: 3.8 #install the python needed
     - name: execute py script # run the test.py to get the latest data
       run: |
-        python test.py "${{ github.event.issue.title }}" "${{ github.event.issue.body }}"
-    - name: setup git config
-      run: |
-        git config user.name "GitHub Actions Bot"
-        git config user.email "<>"
-    - name: create branch
-      run: |
-        git checkout -b ${{ github.event.issue.body }}
-        git commit -a -m "codeowner edited"
-        git push origin ${{ github.event.issue.body }}
+        python cla_check_2.py

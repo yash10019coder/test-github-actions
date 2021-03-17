@@ -26,7 +26,7 @@ jobs:
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
         run: |
-          python cla_check_2.py ${{ github.event.pull_request.user.login }}
+          python cla_check.py ${{ github.event.pull_request.user.login }}
       - name: Comment on failure
         if: ${{ failure() }}
         env:

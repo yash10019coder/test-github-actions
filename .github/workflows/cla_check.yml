@@ -17,7 +17,7 @@ jobs:
         python-version: '3.8'
     - name: Install dependencies
       run: |
-        pip install --upgrade google-api-python-client google-auth-httplib2
-    - name: execute CLA script
+        pip install google-api-python-client google-auth-oauthlib
+    - name: execute cla script
       run: |
         python cla_check_2.py

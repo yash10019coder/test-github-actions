@@ -3,6 +3,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 
+from termcolor import colored
+
 import os.path
 import sys
 import json
@@ -15,31 +17,35 @@ SAMPLE_SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8'
 SAMPLE_RANGE_NAME = 'Usernames'
 TOKEN = os.environ['SHEETS_TOKEN']
 
+
 def getValues():
-    creds = None
-    creds = Credentials.from_authorized_user_info(json.loads(TOKEN), SCOPES)
-
-    service = build('sheets', 'v4', credentials=creds)
-
-    # Call the Sheets API
-    sheet = service.spreadsheets()
-    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                              range=SAMPLE_RANGE_NAME).execute()
-    return result.get('values', [])
+  result = None
+  creds = None
+  try:
+      creds = Credentials.from_authorized_user_info(
+          json.loads(TOKEN), SCOPES)
+      service = build('sheets', 'v4', credentials=creds)
+      # Call the Sheets API
+      sheet = service.spreadsheets()
+      result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                  range=SAMPLE_RANGE_NAME).execute()
+      result = result.get('values', [])
+  except:
+      print("API error:", sys.exc_info()[0])
+  finally:
+      return result
 
 
 def main():
-    prAuthor = sys.argv[1]
-
-    print(prAuthor)
-    values = getValues()
-    if not values:
-        print('No data found.')
-    else:
-        print('Name, Major:')
-        for row in values:
-            # Print columns A and E, which correspond to indices 0 and 4.
-            print('%s' % (row[0]))
+  prAuthor = [sys.argv[1]]
+  print('Checking if ', prAuthor, ' has signed the CLA')
+  values = getValues()
+  if not values:
+      print('No data found.')
+  if(prAuthor in values):
+      exit(0)
+  else:
+      exit(1)
 
 
 if __name__ == '__main__':

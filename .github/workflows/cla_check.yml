@@ -21,4 +21,4 @@ jobs:
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
         run: |
-          python cla_check_2.py gp201
+          python cla_check_2.py 'gp201'

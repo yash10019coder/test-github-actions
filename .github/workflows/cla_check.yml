@@ -32,4 +32,4 @@ jobs:
         env:
             GITHUB_TOKEN: ${{ secrets.TOKEN }}
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} --body 'Hi @' + ${{ github.event.pull_request.user.login }} + ', you need to sign the CLA.'
+          gh pr comment ${{ github.event.pull_request.number }} --body "Author of the PR has not signed the CLA"

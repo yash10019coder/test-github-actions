@@ -20,4 +20,4 @@ jobs:
         pip install google-api-python-client google-auth-oauthlib
     - name: execute cla script
       run: |
-        python cla_check_2.py
+        python cla_check_2.py gp201

@@ -12,7 +12,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 SAMPLE_SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8'
 SAMPLE_RANGE_NAME = 'Usernames'
 
-def main():
+def getValues():
   creds = None
   creds = Credentials.from_authorized_user_file('token.json', SCOPES)
 
@@ -22,7 +22,10 @@ def main():
   sheet = service.spreadsheets()
   result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                               range=SAMPLE_RANGE_NAME).execute()
-  values = result.get('values', [])
+
+def main():
+  
+  values = getValues()
   if not values:
       print('No data found.')
   else:

@@ -1,8 +1,11 @@
-from __future__ import print_function
-import os.path
-import json
 from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
+
+import os.path
+import sys
+import json
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
@@ -10,35 +13,40 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8'
 SAMPLE_RANGE_NAME = 'Usernames'
+TOKEN = os.environ['SHEETS_TOKEN']
+
+
+def getValues():
+    result = None
+    creds = None
+    try:
+        creds = Credentials.from_authorized_user_info(
+            json.loads(TOKEN), SCOPES)
+        service = build('sheets', 'v4', credentials=creds)
+        # Call the Sheets API
+        sheet = service.spreadsheets()
+        result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                    range=SAMPLE_RANGE_NAME).execute()
+        result = result.get('values', [])
+    except:
+        print("API error:", sys.exc_info()[0])
+    finally:
+        return result
+
 
 def main():
-    """Shows basic usage of the Sheets API.
-    Prints values from a sample spreadsheet.
-    """
+    prAuthor = [sys.argv[1]]
+    print('Checking if ', prAuthor, ' has signed the CLA')
+    values = getValues()
+    if not values:
+        print('No data found.')
+    if(prAuthor in values):
+        print(prAuthor, ' has signed the CLA')
+        exit(0)
+    else:
+        print(prAuthor, ' has not signed the CLA')
+        exit(1)
 
-    tmp = {"scopes": ["https://www.googleapis.com/auth/spreadsheets.readonly"], "token_uri": "https://oauth2.googleapis.com/token", "expiry": "2021-03-17T16:37:31.818747Z", "token": "ya29.a0AfH6SMArk7xbOZ8nVbb6AKCqHNOZ02aWhkL-OC16lnaRM_Lcp6GYLk2mQi4ChbnA8PlR4A4HEZKuj468VBvqvGCOlF4P722q9HFIlaV-ZBDlLVPSYECIPVP25X35psVgQqKwBetJPOZ7m2bOo7eGd-ydIrOl", "client_id": "589502381328-ejaahnr6l7seamn7mf3qindk3v8b2qej.apps.googleusercontent.com", "client_secret": "tfq98wceMO7kH846HJOYaIAA", "refresh_token": "1//0gC-jLMYI6h5cCgYIARAAGBASNwF-L9IrP1wU348_rdGmcQJfbU-UDcAako6niWQbSkYO57FdqNWHJ6pbXyJw1zYYg8tqJq6xSAQ"}
-
-    creds = None
-    creds = Credentials.from_authorized_user_info(tmp, SCOPES)
-
-    service = build('sheets', 'v4', credentials=creds)
-
-    # Call the Sheets API
-    sheet = service.spreadsheets()
-    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                range=SAMPLE_RANGE_NAME).execute()
-    values = result.get('values', [])
-
-    print(['gp202'] in values)
-
-
-    # if not values:
-    #     print('No data found.')
-    # else:
-    #     print('Name, Major:')
-    #     for row in values:
-    #         # Print columns A and E, which correspond to indices 0 and 4.
-    #         print('%s' % (row[0]))
 
 if __name__ == '__main__':
     main()

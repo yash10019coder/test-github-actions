@@ -4,7 +4,7 @@ name: CLA check
 
 on:
   pull_request:
-    types: [assigned, opened, synchronize, reopened]
+    branches: [ develop ]
 
 jobs:
   cla_check:
@@ -26,4 +26,10 @@ jobs:
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
         run: |
-          python cla_check_2.py ${{ github.event.pull_request.user.login }}
+          python cla_check.py ${{ github.event.pull_request.user.login }}
+      - name: Comment on failure
+        if: ${{ failure() }}
+        env:
+            GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} --body "Author of the PR has not signed the CLA"

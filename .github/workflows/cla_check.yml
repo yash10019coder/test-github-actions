@@ -3,8 +3,14 @@ name: CLA check
 # check if the PR author has signed the CLA
 
 on:
+  push:
+    branches:
+      - develop
+      - release-*
   pull_request:
-    branches: [ develop ]
+    branches:
+      - develop
+      - release-*
 
 jobs:
   cla_check:
@@ -12,22 +18,22 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04]
-
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: actions/setup-python@v2
         with:
-          python-version: "3.8"
+          python-version: '2.x'
+          architecture: 'x64'
+      - name: Setup python by installing wheel
+        run: pip install wheel==0.35.0
       - name: Install dependencies
         run: |
-          pip install google-api-python-client google-auth-oauthlib python-utils
-          sudo apt-get install python-yaml
+          pip install google-api-python-client google-auth-oauthlib
       - name: execute cla script
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
         run: |
-          python -m scripts.cla_check ${{ github.event.pull_request.user.login }}
+          python -m scripts.cla_check.py ${{ github.event.pull_request.user.login }}
       - name: Comment on failure
         if: ${{ failure() }}
         env:

@@ -84,7 +84,7 @@ def main():
     else:
         print(pr_author, ' has not signed the CLA')
         comment = "Hi! @" + \
-        pr_author[0] + "Welcome to Oppia! Please could you " + \
+        pr_author[0] + " Welcome to Oppia! Please could you " + \
         "follow the instructions " + LINK_RESULT + \
         " to get started? You'll need to do this before we can accept your PR.";
         cmd = 'gh pr comment ' + PR_NUMBER + ' --body "'+ comment +'"'

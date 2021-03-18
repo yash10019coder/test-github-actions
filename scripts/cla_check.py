@@ -78,7 +78,7 @@ def main():
     else:
         print(pr_author, ' has not signed the CLA')
         cmt = 'gh pr comment ' + PR_NUMBER + '--body "Author of the PR has not signed the CLA"'
-        subprocess.Popen(cmt).wait()
+        subprocess.Popen(cmt, stderr=subprocess.STDOUT,shell=True).wait()
         exit(1)
 
 

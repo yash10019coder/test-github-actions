@@ -21,7 +21,8 @@ jobs:
           python-version: "3.8"
       - name: Install dependencies
         run: |
-          pip install google-api-python-client google-auth-oauthlib python-utils
+          pip install google-api-python-client google-auth-oauthlib
+          sudo apt-get python-yaml
       - name: execute cla script
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}

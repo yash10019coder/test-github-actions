@@ -43,6 +43,11 @@ Note that the root folder MUST be named 'oppia'.
 """)
 
 
+def pr_comment(comment=None):
+    if not comment:
+        print(comment)
+        subprocess.Popen(comment, stderr=subprocess.STDOUT,shell=True).wait()
+
 def get_values():
     """Does Google Sheets API Call."""
     result = None
@@ -58,7 +63,7 @@ def get_values():
         result = result.get('values', [])
     except Exception as e:
         print('API error:', e)
-        comment = 'gh pr comment ' + PR_NUMBER + '--body "CLA_CHECK: API ERROR"'
+        comment = 'gh pr comment ' + PR_NUMBER + ' --body "CLA_CHECK: API ERROR"'
         subprocess.Popen(comment, stderr=subprocess.STDOUT,shell=True).wait()
     return result
 
@@ -77,8 +82,7 @@ def main():
     else:
         print(pr_author, ' has not signed the CLA')
         comment = 'gh pr comment ' + PR_NUMBER + ' --body "Author of the PR has not signed the CLA"'
-        print(comment)
-        subprocess.Popen(comment, stderr=subprocess.STDOUT,shell=True).wait()
+        pr_comment(comment)
         exit(1)
 
 

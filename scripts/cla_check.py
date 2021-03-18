@@ -31,7 +31,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 SAMPLE_SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8'
 SAMPLE_RANGE_NAME = 'Usernames'
 TOKEN = os.environ['SHEETS_TOKEN']
-GITHUB_TOKEN = os.environ['TOKEN']
+GITHUB_TOKEN = os.environ['GITHUB_TOKEN']
 PR_NUMBER = os.environ['PR_NUMBER']
 
 _PARSER = argparse.ArgumentParser(

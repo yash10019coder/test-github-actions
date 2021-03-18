@@ -20,11 +20,13 @@ from __future__ import unicode_literals  # pylint: disable=import-only-modules
 import argparse
 import json
 import os.path
-import shlex, subprocess
+import subprocess
 import sys
 
-from google.oauth2.credentials import Credentials # isort:skip pylint: disable=import-only-modules
-from googleapiclient.discovery import build # isort:skip pylint: disable=import-only-modules
+# isort:skip pylint: disable=import-only-modules
+from google.oauth2.credentials import Credentials
+# isort:skip pylint: disable=import-only-modules
+from googleapiclient.discovery import build
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
@@ -34,6 +36,7 @@ SAMPLE_RANGE_NAME = 'Usernames'
 TOKEN = os.environ['SHEETS_TOKEN']
 GITHUB_TOKEN = os.environ['GITHUB_TOKEN']
 PR_NUMBER = os.environ['PR_NUMBER']
+LINK_RESULT = 'https://github.com/oppia/oppia/wiki/Contributing-code-to-Oppia#setting-things-up'
 
 _PARSER = argparse.ArgumentParser(
     description="""
@@ -54,13 +57,13 @@ def get_values():
         sheet = service.spreadsheets()
         result = sheet.values().get(
             spreadsheetId=SAMPLE_SPREADSHEET_ID, range=SAMPLE_RANGE_NAME
-            ).execute()
+        ).execute()
         result = result.get('values', [])
     except Exception as e:
         print('API error:', e)
-        comment = 'gh pr comment ' + PR_NUMBER + ' --body "CLA_CHECK: API ERROR."'
-        print(comment)
-        subprocess.Popen(comment, stderr=subprocess.STDOUT,shell=True).wait()
+        cmd = 'gh pr comment ' + PR_NUMBER + ' --body "CLA_CHECK: API ERROR."'
+        print(cmd)
+        subprocess.Popen(cmd, stderr=subprocess.STDOUT, shell=True).wait()
     return result
 
 
@@ -71,18 +74,22 @@ def main():
     values = get_values()
     if not values:
         print('No data found.')
-        comment = 'gh pr comment ' + PR_NUMBER + ' --body "CLA_CHECK: No data found."'
-        print(comment)
-        subprocess.Popen(comment, stderr=subprocess.STDOUT,shell=True).wait()
+        cmd = 'gh pr comment ' + PR_NUMBER + ' --body "CLA_CHECK: No data found."'
+        print(cmd)
+        subprocess.Popen(cmd, stderr=subprocess.STDOUT, shell=True).wait()
         exit(1)
     if pr_author in values:
         print(pr_author, ' has signed the CLA')
         exit(0)
     else:
         print(pr_author, ' has not signed the CLA')
-        comment = 'gh pr comment ' + PR_NUMBER + ' --body "Author of the PR has not signed the CLA."'
-        print(comment)
-        subprocess.Popen(comment, stderr=subprocess.STDOUT,shell=True).wait()
+        comment = "Hi! @" + \
+        pr_author[0] + "Welcome to Oppia! Please could you " + \
+        "follow the instructions " + LINK_RESULT + \
+        " to get started? You'll need to do this before we can accept your PR.";
+        cmd = 'gh pr comment ' + PR_NUMBER + ' --body "'+ comment +'"'
+        print(cmd)
+        subprocess.Popen(comment, stderr=subprocess.STDOUT, shell=True).wait()
         exit(1)
 
 

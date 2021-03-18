@@ -89,10 +89,7 @@ def main():
         " to get started? You'll need to do this before we can accept your PR.";
         cmd = 'gh pr comment ' + PR_NUMBER + ' --body "'+ comment +'"'
         print(cmd)
-        subprocess.Popen(comment, stderr=subprocess.STDOUT, shell=True).wait()
-        comment = 'gh pr comment ' + PR_NUMBER + ' --body "Author of the PR has not signed the CLA."'
-        print(comment)
-        subprocess.Popen(comment, stderr=subprocess.STDOUT,shell=True).wait()
+        subprocess.Popen(cmd, stderr=subprocess.STDOUT, shell=True).wait()
         exit(1)
 
 

@@ -31,6 +31,8 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 SAMPLE_SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8'
 SAMPLE_RANGE_NAME = 'Usernames'
 TOKEN = os.environ['SHEETS_TOKEN']
+GITHUB_TOKEN = os.environ['TOKEN']
+PR_NUMBER = os.environ['PR_NUMBER']
 
 _PARSER = argparse.ArgumentParser(
     description="""
@@ -55,6 +57,7 @@ def get_values():
         result = result.get('values', [])
     except Exception as e:
         print('API error:', e)
+        os.system('gh pr comment', PR_NUMBER, '--body "CLA_CHECK: API ERROR"')
     return result
 
 
@@ -63,6 +66,7 @@ def main():
     pr_author = [sys.argv[1]]
     print('Checking if ', pr_author, ' has signed the CLA')
     values = get_values()
+    os.system('gh auth login', GITHUB_TOKEN)
     if not values:
         print('No data found.')
         exit(1)
@@ -71,6 +75,7 @@ def main():
         exit(0)
     else:
         print(pr_author, ' has not signed the CLA')
+        os.system('gh pr comment', PR_NUMBER, '--body "Author of the PR has not signed the CLA"')
         exit(1)
 
 

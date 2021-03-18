@@ -23,20 +23,20 @@ import os.path
 import subprocess
 import sys
 
-# isort:skip pylint: disable=import-only-modules
-from google.oauth2.credentials import Credentials
-# isort:skip pylint: disable=import-only-modules
-from googleapiclient.discovery import build
+import python_utils
+
+from google.oauth2.credentials import Credentials # isort:skip pylint: disable=import-only-modules
+from googleapiclient.discovery import build # isort:skip pylint: disable=import-only-modules
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
+LINK_RESULT = ['https://github.com/oppia/oppia/wiki' + 
+               '/Contributing-code-to-Oppia#setting-things-up']
+PR_NUMBER = os.environ['PR_NUMBER']
 SAMPLE_SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8'
 SAMPLE_RANGE_NAME = 'Usernames'
 TOKEN = os.environ['SHEETS_TOKEN']
-GITHUB_TOKEN = os.environ['GITHUB_TOKEN']
-PR_NUMBER = os.environ['PR_NUMBER']
-LINK_RESULT = 'https://github.com/oppia/oppia/wiki/Contributing-code-to-Oppia#setting-things-up'
 
 _PARSER = argparse.ArgumentParser(
     description="""
@@ -57,7 +57,7 @@ def get_values():
         sheet = service.spreadsheets()
         result = sheet.values().get(
             spreadsheetId=SAMPLE_SPREADSHEET_ID, range=SAMPLE_RANGE_NAME
-        ).execute()
+            ).execute()
         result = result.get('values', [])
     except Exception as e:
         print('API error:', e)
@@ -74,7 +74,8 @@ def main():
     values = get_values()
     if not values:
         print('No data found.')
-        cmd = 'gh pr comment ' + PR_NUMBER + ' --body "CLA_CHECK: No data found."'
+        cmd = ['gh pr comment ' + PR_NUMBER +
+               ' --body "CLA_CHECK: No data found."']
         print(cmd)
         subprocess.Popen(cmd, stderr=subprocess.STDOUT, shell=True).wait()
         exit(1)
@@ -83,11 +84,11 @@ def main():
         exit(0)
     else:
         print(pr_author, ' has not signed the CLA')
-        comment = "Hi! @" + \
-        pr_author[0] + " Welcome to Oppia! Please could you " + \
-        "follow the instructions " + LINK_RESULT + \
-        " to get started? You'll need to do this before we can accept your PR.";
-        cmd = 'gh pr comment ' + PR_NUMBER + ' --body "'+ comment +'"'
+        comment = ['Hi! @' +
+                pr_author[0] + ' Welcome to Oppia! Please could you ' +
+                'follow the instructions ' + LINK_RESULT +
+                ' to get started? You\'ll need to do this before we can accept your PR.']
+        cmd = 'gh pr comment ' + PR_NUMBER + ' --body "' + comment + '"'
         print(cmd)
         subprocess.Popen(cmd, stderr=subprocess.STDOUT, shell=True).wait()
         exit(1)

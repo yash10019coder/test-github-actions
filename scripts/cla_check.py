@@ -75,7 +75,8 @@ def main():
         exit(0)
     else:
         print(pr_author, ' has not signed the CLA')
-        os.system('gh pr comment ' + PR_NUMBER + '--body "Author of the PR has not signed the CLA"')
+        cmt = 'gh pr comment ' + PR_NUMBER + '--body "Author of the PR has not signed the CLA"'
+        os.system(cmt)
         exit(1)
 
 

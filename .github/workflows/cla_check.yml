@@ -33,7 +33,7 @@ jobs:
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
         run: |
-          python -m scripts.cla_check ${{ github.event.pull_request.user.login }}
+          PYTHONIOENCODING=utf-8 python -m scripts.cla_check ${{ github.event.pull_request.user.login }}
       - name: Comment on failure
         if: ${{ failure() }}
         env:

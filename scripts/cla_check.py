@@ -67,8 +67,7 @@ def main():
     pr_author = [sys.argv[1]]
     print('Checking if ', pr_author, ' has signed the CLA')
     values = get_values()
-    os.system('gh auth login ' + GITHUB_TOKEN)
-    subprocess.Popen(["gh","auth","login", GITHUB_TOKEN])
+    subprocess.Popen(["gh","auth","login", GITHUB_TOKEN], stderr=subprocess.STDOUT,shell=True)
     if not values:
         print('No data found.')
         exit(1)

@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install google-api-python-client google-auth-oauthlib
-          sudo apt-get python-yaml
+          sudo apt-get install python-yaml
       - name: execute cla script
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}

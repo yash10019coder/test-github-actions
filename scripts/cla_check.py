@@ -20,6 +20,7 @@ from __future__ import unicode_literals  # pylint: disable=import-only-modules
 import argparse
 import json
 import os.path
+import subprocess
 import sys
 
 from google.oauth2.credentials import Credentials # isort:skip pylint: disable=import-only-modules
@@ -67,6 +68,7 @@ def main():
     print('Checking if ', pr_author, ' has signed the CLA')
     values = get_values()
     os.system('gh auth login ' + GITHUB_TOKEN)
+    subprocess.Popen(["gh","auth","login", GITHUB_TOKEN])
     if not values:
         print('No data found.')
         exit(1)
@@ -76,7 +78,7 @@ def main():
     else:
         print(pr_author, ' has not signed the CLA')
         cmt = 'gh pr comment ' + PR_NUMBER + '--body "Author of the PR has not signed the CLA"'
-        os.system(cmt)
+        subprocess.Popen(cmt)
         exit(1)
 
 

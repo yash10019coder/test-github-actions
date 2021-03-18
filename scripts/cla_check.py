@@ -58,7 +58,8 @@ def get_values():
         result = result.get('values', [])
     except Exception as e:
         print('API error:', e)
-        os.system('gh pr comment ' + PR_NUMBER + '--body "CLA_CHECK: API ERROR"')
+        comment = 'gh pr comment ' + PR_NUMBER + '--body "CLA_CHECK: API ERROR"'
+        subprocess.Popen(comment, stderr=subprocess.STDOUT,shell=True).wait()
     return result
 
 
@@ -67,8 +68,6 @@ def main():
     pr_author = [sys.argv[1]]
     print('Checking if ', pr_author, ' has signed the CLA')
     values = get_values()
-    login = 'gh issue list'
-    subprocess.Popen(login, stderr=subprocess.STDOUT,shell=True)
     if not values:
         print('No data found.')
         exit(1)
@@ -77,8 +76,8 @@ def main():
         exit(0)
     else:
         print(pr_author, ' has not signed the CLA')
-        # cmt = 'gh pr comment ' + PR_NUMBER + '--body "Author of the PR has not signed the CLA"'
-        # subprocess.Popen(cmt, stderr=subprocess.STDOUT,shell=True).wait()
+        comment = 'gh pr comment ' + PR_NUMBER + '--body "Author of the PR has not signed the CLA"'
+        subprocess.Popen(comment, stderr=subprocess.STDOUT,shell=True).wait()
         exit(1)
 
 

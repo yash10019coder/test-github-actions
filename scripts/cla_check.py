@@ -50,7 +50,7 @@ def get_values():
     creds = None
     try:
         creds = Credentials.from_authorized_user_info(
-            json.loads(), scopes=SCOPES)  # pylint: disable=explicit-keyword-args
+            json.loads(TOKEN), scopes=SCOPES)  # pylint: disable=explicit-keyword-args
         service = build('sheets', 'v4', credentials=creds)
         sheet = service.spreadsheets()
         result = sheet.values().get(

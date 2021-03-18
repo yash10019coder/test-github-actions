@@ -22,8 +22,6 @@ import json
 import os.path
 import sys
 
-import python_utils
-
 from google.oauth2.credentials import Credentials # isort:skip pylint: disable=import-only-modules
 from googleapiclient.discovery import build # isort:skip pylint: disable=import-only-modules
 

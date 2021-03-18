@@ -5,11 +5,11 @@ name: CLA check
 on:
   push:
     branches:
-      - develop-*
+      - develop
       - release-*
   pull_request:
     branches:
-      - develop-*
+      - develop
       - release-*
 
 jobs:
@@ -28,7 +28,7 @@ jobs:
         run: pip install wheel==0.35.0
       - name: Install dependencies
         run: |
-          pip install google-api-python-client google-auth-oauthlib python-utils
+          pip install google-api-python-client google-auth-oauthlib
       - name: execute cla script
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}

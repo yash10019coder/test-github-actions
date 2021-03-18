@@ -29,8 +29,9 @@ from googleapiclient.discovery import build # isort:skip pylint: disable=import-
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
-LINK_RESULT = ('https://github.com/oppia/oppia/wiki' + 
-               '/Contributing-code-to-Oppia#setting-things-up')
+LINK_RESULT = (
+    'https://github.com/oppia/oppia/wiki' +
+    '/Contributing-code-to-Oppia#setting-things-up')
 PR_NUMBER = os.environ['PR_NUMBER']
 SAMPLE_SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8'
 SAMPLE_RANGE_NAME = 'Usernames'
@@ -72,8 +73,9 @@ def main():
     values = get_values()
     if not values:
         print('No data found.')
-        cmd = ('gh pr comment ' + PR_NUMBER +
-               ' --body "CLA_CHECK: No data found."')
+        cmd = (
+            'gh pr comment ' + PR_NUMBER +
+            ' --body "CLA_CHECK: No data found."')
         print(cmd)
         subprocess.Popen(cmd, stderr=subprocess.STDOUT, shell=True).wait()
         exit(1)
@@ -82,10 +84,12 @@ def main():
         exit(0)
     else:
         print(pr_author, ' has not signed the CLA')
-        comment = ('Hi! @' +
-                pr_author[0] + ' Welcome to Oppia! Please could you ' +
-                'follow the instructions ' + LINK_RESULT +
-                ' to get started? You\'ll need to do this before we can accept your PR.')
+        comment = (
+            'Hi! @' +
+            pr_author[0] + ' Welcome to Oppia! Please could you ' +
+            'follow the instructions ' + LINK_RESULT +
+            ' to get started? You\'ll need' +
+            ' to do this before we can accept your PR.')
         cmd = 'gh pr comment ' + PR_NUMBER + ' --body "' + comment + '"'
         print(cmd)
         subprocess.Popen(cmd, stderr=subprocess.STDOUT, shell=True).wait()

@@ -37,7 +37,7 @@ function listMajors(auth) {
     const rows = res.data.values;
     if (rows.length) {
       console.log(rows);
-      console.log(rows.find(['gp201']));
+      console.log(rows.indexOf(['gp201']));
     } else {
       console.log('No data found.');
     }

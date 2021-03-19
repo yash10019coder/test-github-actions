@@ -5,26 +5,15 @@ name: CLA check
 on: [push]
 
 jobs:
-  cla_check:
-    runs-on:  ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-18.04]
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '2.x'
-          architecture: 'x64'
-      - name: Setup python by installing wheel
-        run: pip install wheel==0.35.0
-      - name: Install dependencies
-        run: |
-          pip install google-api-python-client google-auth-oauthlib
-      - name: execute cla script
-        env:
-          SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          PR_NUMBER: ${{ github.event.pull_request.number }} 
-        run: |
-          PYTHONIOENCODING=utf-8 python -m scripts.cla_check ${{ github.event.pull_request.user.login }}
+    - name: Hello world action step
+      id: hello
+      uses: actions/hello-world-javascript-action@v1.1
+      with:
+        who-to-greet: 'Mona the Octocat'
+    # Use the output from the `hello` step
+    - name: Get the output time
+      run: echo "The time was ${{ steps.hello.outputs.time }}"

@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/gp201/test-github-actions/issues"
   },
-  "homepage": "https://github.com/gp201/test-github-actions#readme"
+  "homepage": "https://github.com/gp201/test-github-actions#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0"
+  }
 }

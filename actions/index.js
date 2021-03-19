@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const { context, GitHub } = require('@actions/github');
 const { google } = require('googleapis');
-const execSync = require('exec-sync');
+var execSync = require("exec-sync");
 
 const TOKEN = process.env.SHEETS_TOKEN;
 const CREDENTIALS = JSON.parse(process.env.SHEETS_CRED);

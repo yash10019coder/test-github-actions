@@ -13,6 +13,7 @@ jobs:
       - name: Install Dependecies
         run: |  
           npm install googleapis@39
+          npm install exec-sync
       - name: CLA check
         uses: ./
         id: hello

@@ -36,12 +36,12 @@ function claCheck(auth) {
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
     const rows = res.data.values;
-    const flat_rows = [].concat.apply([],rows)
+    const flat_rows = [].concat.apply([], rows)
     if (rows.length) {
       console.log('Checking if ', PR_AUTHOR, ' has signed the CLA');
       const isSign = flat_rows.includes(PR_AUTHOR);
-      if(!isSign) {
-        core.setFailed(PR_AUTHOR +' has not signed the CLA');
+      if (!isSign) {
+        core.setFailed(PR_AUTHOR + ' has not signed the CLA');
       }
     } else {
       console.log('No data found.');

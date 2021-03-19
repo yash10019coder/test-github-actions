@@ -1,7 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { google } = require('googleapis');
-const { exit } = require('node:process');
 
 const TOKEN = process.env.SHEETS_TOKEN;
 const CREDENTIALS = JSON.parse(process.env.SHEETS_CRED);
@@ -44,7 +43,7 @@ function claCheck(auth) {
         exit(0)
       }
       else{
-        exit(1)
+        core.setFailed(PR_AUTHOR, 'has not signed the CLA');
       }
     } else {
       console.log('No data found.');

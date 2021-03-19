@@ -1,13 +1,15 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { google } = require('googleapis');
+const { exit } = require('node:process');
 
 const TOKEN = process.env.SHEETS_TOKEN;
 const CREDENTIALS = JSON.parse(process.env.SHEETS_CRED);
 const SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8';
 const RANGE = 'Usernames';
+consr PR_AUTHOR = 'gp201'; //process.env.PR_AUTHOR;
 
-authorize(listMajors);
+authorize(claCheck);
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -27,7 +29,7 @@ function authorize(callback) {
  * Prints the names and majors of students in a sample spreadsheet:
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
  */
-function listMajors(auth) {
+function claCheck(auth) {
   const sheets = google.sheets({ version: 'v4', auth });
   sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
@@ -35,9 +37,15 @@ function listMajors(auth) {
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
     const rows = res.data.values;
+    const flat_rows = [].concat.apply([],rows)
     if (rows.length) {
-      console.log(rows);
-      console.log(rows.indexOf(['gp201']));
+      console.log('Checking if ', PR_AUTHOR, ' has signed the CLA');
+      if(flat_rows.includes(PR_AUTHOR)) {
+        exit(0)
+      }
+      else{
+        exit(1)
+      }
     } else {
       console.log('No data found.');
     }

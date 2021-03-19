@@ -18,8 +18,5 @@ jobs:
       - name: Hello world action step
         uses: ./
         id: hello
-        with:
-          who-to-greet: 'gp201'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        env:
+          SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN_STR }}

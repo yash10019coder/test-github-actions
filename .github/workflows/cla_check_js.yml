@@ -11,7 +11,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install Dependecies
-        run:  npm install googleapis@39 --save
+        run: |  
+          npm install googleapis@39
+          npm install execSync
       - name: CLA check
         uses: ./
         id: hello

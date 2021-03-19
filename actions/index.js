@@ -1,17 +1,16 @@
 const core = require('@actions/core');
 const { context, GitHub } = require('@actions/github');
 const { google } = require('googleapis');
-var execSync = require("exec-sync");
 
 const TOKEN = process.env.SHEETS_TOKEN;
 const CREDENTIALS = JSON.parse(process.env.SHEETS_CRED);
 const SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8';
 const RANGE = 'Usernames';
 const PR_AUTHOR = context.payload.pull_request.user.login;
-const PR_NUMBER = context.payload.pull_request.number;
-const LINK_RESULT = (
-  'https://github.com/oppia/oppia/wiki' +
-  '/Contributing-code-to-Oppia#setting-things-up')
+// const PR_NUMBER = context.payload.pull_request.number;
+// const LINK_RESULT = (
+//   'https://github.com/oppia/oppia/wiki' +
+//   '/Contributing-code-to-Oppia#setting-things-up')
 
 authorize(claCheck);
 
@@ -46,17 +45,6 @@ function claCheck(auth) {
       console.log('Checking if ', PR_AUTHOR, ' has signed the CLA');
       const isSign = flat_rows.includes(PR_AUTHOR);
       if (!isSign) {
-        const comment = (
-            'Hi! ' +
-            PR_AUTHOR +
-            'Welcome to Oppia! Please could you ' +
-            'follow the instructions ' +
-            LINK_RESULT +
-            " to get started? You'll need to do " +
-            'this before we can accept your PR. Thanks!'
-            );
-        cmd = 'gh pr comment ' + PR_NUMBER + ' --body "' + comment + '"';
-        execSync(cmd);
         core.setFailed(PR_AUTHOR + ' has not signed the CLA');
       }
     } else {

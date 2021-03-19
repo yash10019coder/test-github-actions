@@ -1,0 +1,20 @@
+{
+  "name": "test-github-actions",
+  "version": "1.0.0",
+  "description": "Follow the instruction in https://developers.google.com/sheets/api/quickstart/python",
+  "main": "cla_check.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gp201/test-github-actions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gp201/test-github-actions/issues"
+  },
+  "homepage": "https://github.com/gp201/test-github-actions#readme"
+}

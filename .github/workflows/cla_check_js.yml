@@ -1,0 +1,30 @@
+name: CLA check
+
+# check if the PR author has signed the CLA
+
+on: [push]
+
+jobs:
+  cla_check:
+    runs-on:  ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '2.x'
+          architecture: 'x64'
+      - name: Setup python by installing wheel
+        run: pip install wheel==0.35.0
+      - name: Install dependencies
+        run: |
+          pip install google-api-python-client google-auth-oauthlib
+      - name: execute cla script
+        env:
+          SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }} 
+        run: |
+          PYTHONIOENCODING=utf-8 python -m scripts.cla_check ${{ github.event.pull_request.user.login }}

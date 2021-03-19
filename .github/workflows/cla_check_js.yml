@@ -2,7 +2,7 @@ name: CLA check
 
 # check if the PR author has signed the CLA
 
-on: [pull_request]
+on: [push, pull_request]
 
 jobs:
   hello_world_job:
@@ -11,9 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install Dependecies
-        run: |  
-          npm install googleapis@39
-          npm install execSync
+        run:  npm install googleapis@39
       - name: CLA check
         uses: ./
         id: hello

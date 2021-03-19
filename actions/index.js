@@ -39,6 +39,8 @@ function claCheck(auth) {
     const flat_rows = [].concat.apply([],rows)
     if (rows.length) {
       console.log('Checking if ', PR_AUTHOR, ' has signed the CLA');
+      console.log(flat_rows);
+      console.log(flat_rows.includes(PR_AUTHOR));
       const isSign = flat_rows.includes(PR_AUTHOR);
       if(!isSign) {
         core.setFailed(PR_AUTHOR, 'has not signed the CLA');

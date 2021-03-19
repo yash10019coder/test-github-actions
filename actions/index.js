@@ -37,6 +37,7 @@ function listMajors(auth) {
     const rows = res.data.values;
     if (rows.length) {
       console.log(rows);
+      console.log(rows.includes(['gp201']));
     } else {
       console.log('No data found.');
     }

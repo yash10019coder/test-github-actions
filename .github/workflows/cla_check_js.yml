@@ -2,15 +2,12 @@ name: CLA check
 
 # check if the PR author has signed the CLA
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-      # To use this repository's private action,
-      # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install Dependecies
@@ -21,3 +18,4 @@ jobs:
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
           SHEETS_CRED: ${{ secrets.SHEETS_CRED }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}

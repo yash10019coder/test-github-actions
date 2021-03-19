@@ -7,7 +7,7 @@ const TOKEN = process.env.SHEETS_TOKEN;
 const CREDENTIALS = JSON.parse(process.env.SHEETS_CRED);
 const SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8';
 const RANGE = 'Usernames';
-consr PR_AUTHOR = 'gp201'; //process.env.PR_AUTHOR;
+const PR_AUTHOR = 'gp201'; //process.env.PR_AUTHOR;
 
 authorize(claCheck);
 
@@ -44,6 +44,7 @@ function claCheck(auth) {
         exit(0)
       }
       else{
+        console.log(PR_AUTHOR, ' has not signed the CLA');
         exit(1)
       }
     } else {

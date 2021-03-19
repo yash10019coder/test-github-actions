@@ -55,7 +55,7 @@ function claCheck(auth) {
             " to get started? You'll need to do " +
             'this before we can accept your PR. Thanks!'
             );
-        cmd = 'gh pr comment ' + PR_NUMBER + ' --body "' + comment + '"'
+        cmd = 'gh pr comment ' + PR_NUMBER + ' --body "' + comment + '"';
         execSync(cmd);
         core.setFailed(PR_AUTHOR + ' has not signed the CLA');
       }

@@ -13,6 +13,8 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Install Dependecies
+        run:  npm install googleapis@39 --save
       - name: Hello world action step
         uses: ./
         id: hello

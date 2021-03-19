@@ -2,9 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const {google} = require('googleapis');
 
-const token = process.env.SHEETS_TOKEN_STR
-
-console.log(token);
+var token = process.env.SHEETS_TOKEN_STR;
 
 authorize(JSON.parse(token), listMajors);
 

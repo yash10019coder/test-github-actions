@@ -2,7 +2,7 @@ name: CLA check
 
 # check if the PR author has signed the CLA
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   hello_world_job:

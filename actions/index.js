@@ -4,6 +4,8 @@ const {google} = require('googleapis');
 
 const token = process.env.SHEETS_TOKEN_STR
 
+console.log(token);
+
 authorize(JSON.parse(token), listMajors);
 
 /**

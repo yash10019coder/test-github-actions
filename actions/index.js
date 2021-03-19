@@ -3,7 +3,7 @@ const github = require('@actions/github');
 const { google } = require('googleapis');
 
 const TOKEN = process.env.SHEETS_TOKEN;
-const CREDENTIALS = process.env.SHEETS_CRED;
+const CREDENTIALS = JSON.parse(process.env.SHEETS_CRED);
 const SPREADSHEET_ID = '1naQC7iEfnro5iOjTFEn7iPCxNMPaPa4YnIddjT5CTM8';
 const RANGE = 'Usernames';
 

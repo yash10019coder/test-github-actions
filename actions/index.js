@@ -2,9 +2,9 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const {google} = require('googleapis');
 
-var token = process.env.SHEETS_TOKEN_STR;
-
-authorize(JSON.parse(token), listMajors);
+var token = process.env.SHEETS_TOKEN;
+var credentials = process.env.SHEETS_CRED;
+authorize(JSON.parse(credentials), listMajors);
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -12,8 +12,8 @@ authorize(JSON.parse(token), listMajors);
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
- function authorize(token, callback) {
-  const {client_secret, client_id, redirect_uris} = token;
+ function authorize(credentials, callback) {
+  const {client_secret, client_id, redirect_uris} = credentials.web;
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
   oAuth2Client.setCredentials(JSON.parse(token));

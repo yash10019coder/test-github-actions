@@ -19,4 +19,5 @@ jobs:
         uses: ./
         id: hello
         env:
-          SHEETS_TOKEN_STR: ${{ secrets.SHEETS_TOKEN }}
+          SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
+          SHEETS_CRED: ${{ secrets.SHEETS_CRED }}

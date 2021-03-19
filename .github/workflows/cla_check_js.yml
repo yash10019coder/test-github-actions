@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Hello world action step
-        uses: actions/test-github-actions
+        uses: gp201/test-github-actions
         id: hello
         with:
           who-to-greet: 'gp201'

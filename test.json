@@ -7,8 +7,8 @@
         "end": "DD/MM/YYYY"
       },
       {
-        "start": "dd/mm/yyyy",
-        "end": "dd/mm/yyyy"
+        "start": "DD/MM/YYYY",
+        "end": "DD/MM/YYYY"
       }
     ]
   }

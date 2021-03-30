@@ -10,12 +10,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install Dependecies
-        run:  npm install googleapis@39
-      - name: CLA check
-        uses: ./
-        id: hello
+      - name: PraneethsOppiabot
+        # You may pin to the exact commit or the version.
+        # uses: gp201/oppiabot@15c3bafee8d34142271733799756670d3e37740a
+        uses: gp201/oppiabot@test.1
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
           SHEETS_CRED: ${{ secrets.SHEETS_CRED }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+

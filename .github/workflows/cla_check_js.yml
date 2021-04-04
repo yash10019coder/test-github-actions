@@ -19,13 +19,6 @@ jobs:
         # You may pin to the exact commit or the version.
         # uses: gp201/oppiabot@15c3bafee8d34142271733799756670d3e37740a
         uses: gp201/oppiabot@test.15
-        with:
-          # The repository token needed to create comments.
-          repo-token: ${{ secrets.TOKEN }}
-          # API credential for accessing google apis.
-          google-api-key: ${{ secrets.TOKEN }}
-          # ID for the CLA spreadsheet.
-          cla-sheet-id: ${{ secrets.SPREADSHEET_ID }}
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
           SHEETS_CRED: ${{ secrets.SHEETS_CRED }}

@@ -3,11 +3,6 @@ name: CLA check
 # check if the PR author has signed the CLA
 
 on:
-  push:
-    branches:
-      - develop
-      - release-*
-      - js-*
   pull_request_target:
     branches:
       - develop

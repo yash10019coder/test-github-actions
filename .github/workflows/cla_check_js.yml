@@ -22,6 +22,5 @@ jobs:
         env:
           SHEETS_TOKEN: ${{ secrets.SHEETS_TOKEN }}
           SHEETS_CRED: ${{ secrets.SHEETS_CRED }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
 

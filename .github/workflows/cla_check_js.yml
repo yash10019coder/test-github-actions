@@ -15,10 +15,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: PraneethsOppiabot
+      - name: Prnaeeth Actions
         # You may pin to the exact commit or the version.
-        # uses: gp201/oppiabot@15c3bafee8d34142271733799756670d3e37740a
-        uses: gp201/oppiabot@test.18
+        # uses: gp201/oppiabot@66e8d203a8afdd063086e49a7fee2eb0f2120b9c
+        uses: gp201/oppiabot@test.19
         with:
           repo-token: ${{secrets.GITHUB_TOKEN}}
         env:

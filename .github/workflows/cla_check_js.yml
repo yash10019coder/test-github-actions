@@ -18,7 +18,7 @@ jobs:
       - name: Praneeths Actions
         # You may pin to the exact commit or the version.
         # uses: gp201/oppiabot@5f3d135ee4c5c4de4ded0ae25a010211253648c5
-        uses: gp201/oppiabot@test.22
+        uses: gp201/oppiabot@test.23
         with:
           repo-token: ${{secrets.GITHUB_TOKEN}}
           sheets-token: ${{ secrets.SHEETS_TOKEN }}

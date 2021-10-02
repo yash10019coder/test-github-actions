@@ -23,5 +23,5 @@ jobs:
           repo-token: ${{secrets.GITHUB_TOKEN}}
           sheets-token: ${{ secrets.SHEETS_TOKEN }}
           sheets-cred: ${{ secrets.SHEETS_CRED }}
-          spreadsheet-id: ${{ secrets.SPREADSHEET_ID }}
+          cla-sheet-id: ${{ secrets.SPREADSHEET_ID }}
 

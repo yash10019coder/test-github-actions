@@ -24,7 +24,7 @@ jobs:
         echo "$GITHUB_CONTEXT"
         git config --global user.name '${{ github.event.head_commit.author.username }}'
         git config --global user.email '${{ github.event.head_commit.author.email }}'
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
         git add .
         cat >> commit_msg.txt << EOF
         ${{ github.event.head_commit.message }}

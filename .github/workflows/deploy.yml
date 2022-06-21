@@ -25,6 +25,6 @@ jobs:
         git config --global user.name '${{ github.event.head_commit.author.username }}'
         git config --global user.email '${{ github.event.head_commit.author.email }}'
         git add .
-        echo ${{ github.event.head_commit.message }} > /tmp/commit_msg.txt
+        cat >> /tmp/commit_msg.txt << EOF ${{ github.event.head_commit.message }} EOF
         git commit -F /tmp/commit_msg.txt
         git push origin master

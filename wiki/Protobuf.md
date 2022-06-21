@@ -1,5 +1,7 @@
 # What is ProtoBuf?
 
+
+
 Protobuf is platform-independent, extensible mechanism for serializing and deserializing data. It's like JSON but shorter, faster, and more efficient. Also generates native language bindings. Native language bindings are like making models for each language.
 
 We write .proto files and then protobuf compiler generates the interfaces and classes for our proto models in native language bindings.

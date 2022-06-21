@@ -30,4 +30,4 @@ jobs:
         ${{ github.event.head_commit.message }}
         EOF
         git commit -F commit_msg.txt
-        git push
+        git push --force

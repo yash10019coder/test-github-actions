@@ -19,7 +19,7 @@ jobs:
         TEMP_WIKI_FOLDER: temp_wiki
       run: |
         git clone https://github.com/gp201/test-github-actions.wiki.git ${{ env.TEMP_WIKI_FOLDER }}
-        rsync -av --delete $WIKI_DIR ${{ env.TEMP_WIKI_FOLDER }}/ --exclude .git
+        rsync -av --delete wiki/ ${{ env.TEMP_WIKI_FOLDER }}/ --exclude .git
         cd ${{ env.TEMP_WIKI_FOLDER }}
         git config --global user.name '${{ github.actor }}'
         git config --global user.email '${{ github.actor }}@users.noreply.github.com'

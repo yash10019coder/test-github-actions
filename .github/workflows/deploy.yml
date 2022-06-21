@@ -24,5 +24,6 @@ jobs:
         echo "$GITHUB_CONTEXT"
         git config --global user.name '${{ github.event.head_commit.user.login }}'
         git config --global user.email '${{ github.event.head_commit.user.login }}@users.noreply.github.com'
-        git commit -am "${{ github.event.head_commit.message }}"
+        git add .
+        git commit -m "${{ github.event.head_commit.message }}"
         git push origin master

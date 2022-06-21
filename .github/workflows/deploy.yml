@@ -21,7 +21,7 @@ jobs:
         git clone https://github.com/gp201/test-github-actions.wiki.git ${{ env.TEMP_WIKI_FOLDER }}
         rsync -av --delete wiki/ ${{ env.TEMP_WIKI_FOLDER }}/ --exclude .git
         cd ${{ env.TEMP_WIKI_FOLDER }}
-        echo ${{ github.event }}
+        echo ${{github.event.action}}
         git config --global user.name '${{ github.event.pull_request.user.login }}'
         git config --global user.email '${{ github.event.pull_request.user.login }}@users.noreply.github.com'
         git commit -am "${{ github.event.head_commit.message }}"

@@ -18,10 +18,10 @@ jobs:
       env:
         TEMP_WIKI_FOLDER: temp_wiki
       run: |
-      git clone https://github.com/oppia/oppia-android.wiki.git ${{ env.TEMP_WIKI_FOLDER }}
-      rsync -av --delete $WIKI_DIR ${{ env.TEMP_WIKI_FOLDER }}/ --exclude .git
-      cd ${{ env.TEMP_WIKI_FOLDER }}
-      git config --global user.name '${{ github.actor }}'
-      git config --global user.email '${{ github.actor }}@users.noreply.github.com'
-      git commit -am "${{ github.event.head_commit.message }}"
-      git push origin master
+        git clone https://github.com/oppia/oppia-android.wiki.git ${{ env.TEMP_WIKI_FOLDER }}
+        rsync -av --delete $WIKI_DIR ${{ env.TEMP_WIKI_FOLDER }}/ --exclude .git
+        cd ${{ env.TEMP_WIKI_FOLDER }}
+        git config --global user.name '${{ github.actor }}'
+        git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+        git commit -am "${{ github.event.head_commit.message }}"
+        git push origin master
